@@ -85,7 +85,7 @@ export class Grid extends React.Component {
             onMouseOver={this.onMouseOver}
             onMouseOut={this.onMouseOut}
             svgRef={this._svgRef}
-          />
+          />,
         );
       }
     }

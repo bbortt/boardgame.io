@@ -6,7 +6,6 @@
  * https://opensource.org/licenses/MIT.
  */
 
-import { Client } from '../src/client/client';
-import { LobbyClient, LobbyClientError } from '../src/lobby/client';
+export { Client } from '../src/client/client';
 
-export { Client, LobbyClient, LobbyClientError };
+export { LobbyClient, LobbyClientError } from '../src/lobby/client';

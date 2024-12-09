@@ -6,17 +6,17 @@
  * https://opensource.org/licenses/MIT.
  */
 
-import resolve from 'rollup-plugin-node-resolve';
-import replace from 'rollup-plugin-replace';
-import babel from 'rollup-plugin-babel';
-import commonjs from 'rollup-plugin-commonjs';
+import resolve from '@rollup/plugin-node-resolve';
+import replace from '@rollup/plugin-replace';
+import babel from '@rollup/plugin-babel';
+import commonjs from '@rollup/plugin-commonjs';
 import filesize from 'rollup-plugin-filesize';
 import svelte from 'rollup-plugin-svelte';
-import { terser } from 'rollup-plugin-terser';
-import pkg from './package.json';
+import terser from '@rollup/plugin-terser';
+import pkg from './package.json' with { type: 'json' };
 import typescript from 'rollup-plugin-typescript2';
 import ts from 'typescript';
-const subpackages = require('./subpackages');
+import subpackages from './subpackages.mjs';
 
 const internalDeps = new Set(['svelte']);
 const external = [
@@ -26,8 +26,8 @@ const external = [
 ];
 
 const plugins = [
-  babel({ exclude: '**/node_modules/**' }),
-  resolve({ browser: true, only: [/svelte/] }),
+  babel({ exclude: '**/node_modules/**', babelHelpers: 'bundled' }),
+  resolve({ browser: true, resolveOnly: [/svelte/] }),
   typescript({
     typescript: ts,
     tsconfigOverride: {

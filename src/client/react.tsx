@@ -18,7 +18,7 @@ export type WrappedBoardProps = Pick<
   WrappedBoardDelegates | 'debug'
 >;
 
-type ExposedClientProps<G extends any = any> = Pick<
+type ExposedClientProps<G = any> = Pick<
   _ClientImpl<G>,
   | 'log'
   | 'moves'
@@ -33,16 +33,16 @@ type ExposedClientProps<G extends any = any> = Pick<
   | 'chatMessages'
 >;
 
-export type BoardProps<G extends any = any> = ClientState<G> &
+export type BoardProps<G = any> = ClientState<G> &
   Omit<WrappedBoardProps, keyof ExposedClientProps<G>> &
   ExposedClientProps<G> & {
     isMultiplayer: boolean;
   };
 
 type ReactClientOpts<
-  G extends any = any,
+  G = any,
   P extends BoardProps<G> = BoardProps<G>,
-  PluginAPIs extends Record<string, unknown> = Record<string, unknown>
+  PluginAPIs extends Record<string, unknown> = Record<string, unknown>,
 > = Omit<ClientOpts<G, PluginAPIs>, WrappedBoardDelegates> & {
   board?: React.ComponentType<P>;
   loading?: React.ComponentType;
@@ -68,9 +68,9 @@ type ReactClientOpts<
  *   UNDO and REDO.
  */
 export function Client<
-  G extends any = any,
+  G = any,
   P extends BoardProps<G> = BoardProps<G>,
-  PluginAPIs extends Record<string, unknown> = Record<string, unknown>
+  PluginAPIs extends Record<string, unknown> = Record<string, unknown>,
 >(opts: ReactClientOpts<G, P, PluginAPIs>) {
   const { game, numPlayers, board, multiplayer, enhancer } = opts;
   let { loading, debug } = opts;

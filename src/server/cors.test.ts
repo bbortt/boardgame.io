@@ -1,7 +1,8 @@
-import { EventEmitter } from 'events';
 import cors from 'cors';
 import type { Origins as OriginsTS } from './cors';
-let { Origins } = require('./cors') as { Origins: typeof OriginsTS };
+import localCors from './cors';
+
+let { Origins } = localCors as { Origins: typeof OriginsTS };
 
 describe('localhost origin', () => {
   const middleware = cors({ origin: [Origins.LOCALHOST] });
@@ -25,6 +26,7 @@ describe('localhost origin', () => {
 describe('development-only localhost origin', () => {
   const reloadOriginsModule = () => {
     jest.resetModules();
+    // eslint-disable-next-line @typescript-eslint/no-require-imports,unicorn/prefer-module
     ({ Origins } = require('./cors'));
   };
 
@@ -93,7 +95,7 @@ function createMockRequest(origin: string): cors.CorsRequest {
  * Class mocking the interface of the request object expected by the
  * CORS middleware package.
  */
-class MockResponse extends EventEmitter {
+class MockResponse extends EventTarget {
   _headers: Record<string, string>;
   statusCode: number;
 
@@ -107,7 +109,7 @@ class MockResponse extends EventEmitter {
     process.nextTick(
       function () {
         this.emit('finish');
-      }.bind(this)
+      }.bind(this),
     );
   }
 

@@ -47,7 +47,7 @@ function Init(root) {
     45,
     window.innerWidth / window.innerHeight,
     0.1,
-    1000
+    1000,
   );
   camera.position.z = 5;
   camera.position.x = 12;

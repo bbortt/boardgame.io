@@ -50,7 +50,7 @@ export const App = () => (
               path={route.path}
               component={route.component}
             />
-          )
+          ),
         )}
       </section>
     </main>

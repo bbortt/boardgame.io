@@ -6,8 +6,8 @@
  * https://opensource.org/licenses/MIT.
  */
 
-const shell = require('shelljs');
-const subpackages = require('../subpackages');
+import shell from 'shelljs';
+import subpackages from '../subpackages';
 
 shell.rm('-rf', 'dist');
 shell.rm('-rf', subpackages);

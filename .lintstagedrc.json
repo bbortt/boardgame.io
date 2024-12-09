@@ -1,0 +1,5 @@
+{
+  "{,{.github,benchmark,examples,src}/**/}*.{css,json,(m|)js,ts(x|),md,xml,y(a|)ml}": [
+    "prettier --write -u"
+  ]
+}

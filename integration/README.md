@@ -1313,7 +1313,7 @@ it('sums numbers', () => {
 ```
 
 All `expect()` matchers supported by Jest are [extensively documented here](https://facebook.github.io/jest/docs/en/expect.html#content).<br>
-You can also use [`jest.fn()` and `expect(fn).toBeCalled()`](https://facebook.github.io/jest/docs/en/expect.html#tohavebeencalled) to create “spies” or mock functions.
+You can also use [`jest.fn()` and `expect(fn).toHaveBeenCalled()`](https://facebook.github.io/jest/docs/en/expect.html#tohavebeencalled) to create “spies” or mock functions.
 
 ### Testing Components
 

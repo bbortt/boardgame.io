@@ -102,7 +102,7 @@ function TicTacToeBoard({ G, ctx, moves, isActive, playerID }) {
           ) : (
             <div style={cellStyle(false)}>{G.cells[id]}</div>
           )}
-        </td>
+        </td>,
       );
     }
     tbody.push(<tr key={i}>{cells}</tr>);

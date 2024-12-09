@@ -9,4 +9,6 @@ const DBFromEnv = () => {
     : new InMemory();
 };
 
-export { InMemory, FlatFile, DBFromEnv };
+export { InMemory } from './inmemory';
+export { FlatFile } from './flatfile';
+export { DBFromEnv };

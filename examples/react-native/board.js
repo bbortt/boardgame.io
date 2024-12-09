@@ -51,13 +51,13 @@ class Board extends React.Component {
             underlayColor="transparent"
           >
             <Text style={styles.value}>{marker[this.props.G.cells[id]]}</Text>
-          </TouchableHighlight>
+          </TouchableHighlight>,
         );
       }
       tbody.push(
         <View key={i} style={styles.row}>
           {cells}
-        </View>
+        </View>,
       );
     }
 
