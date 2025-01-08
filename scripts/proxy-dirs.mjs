@@ -6,9 +6,9 @@
  * https://opensource.org/licenses/MIT.
  */
 
-const subpackages = require('../subpackages');
-const path = require('path');
-const { mkdirSync, writeFileSync } = require('fs');
+import subpackages from '../subpackages';
+import path from 'node:path';
+import { mkdirSync, writeFileSync } from 'node:fs';
 
 function PackageJson(name, { mainDir, esmDir } = {}) {
   const root = '../dist';
@@ -25,7 +25,7 @@ function PackageJson(name, { mainDir, esmDir } = {}) {
 }
 
 function makeSubpackage(name, opts) {
-  const dir = path.resolve(__dirname, `../${name}`);
+  const dir = path.resolve(import.meta.dirname, `../${name}`);
   mkdirSync(dir);
   writeFileSync(`${dir}/package.json`, PackageJson(name, opts));
 }

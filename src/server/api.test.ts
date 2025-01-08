@@ -18,7 +18,7 @@ import * as StorageAPI from './db/base';
 import { Origins } from './cors';
 import type { Game, Server } from '../types';
 
-jest.setTimeout(2000000000);
+jest.setTimeout(2_000_000_000);
 
 beforeEach(() => {
   dateMock.clear();
@@ -86,7 +86,7 @@ describe('.configureRouter', () => {
   }
 
   function createApiServer(
-    args: Omit<Parameters<typeof addApiToServer>[0], 'app'>
+    args: Omit<Parameters<typeof addApiToServer>[0], 'app'>,
   ) {
     const app: Server.App = new Koa();
     addApiToServer({ app, ...args });
@@ -168,7 +168,7 @@ describe('.configureRouter', () => {
               createdAt: updatedAt.getTime(),
               updatedAt: updatedAt.getTime(),
             }),
-          })
+          }),
         );
       });
 
@@ -190,7 +190,7 @@ describe('.configureRouter', () => {
                   numPlayers: 2,
                 }),
               }),
-            })
+            }),
           );
         });
       });
@@ -257,7 +257,7 @@ describe('.configureRouter', () => {
                   }),
                 }),
               }),
-            })
+            }),
           );
         });
 
@@ -273,7 +273,7 @@ describe('.configureRouter', () => {
                   },
                 }),
               }),
-            })
+            }),
           );
         });
       });
@@ -320,7 +320,7 @@ describe('.configureRouter', () => {
               metadata: expect.objectContaining({
                 unlisted: true,
               }),
-            })
+            }),
           );
         });
       });
@@ -435,7 +435,7 @@ describe('.configureRouter', () => {
                     name: 'alice',
                   }),
                 }),
-              })
+              }),
             );
           });
 
@@ -456,7 +456,7 @@ describe('.configureRouter', () => {
                       data: 99,
                     }),
                   }),
-                })
+                }),
               );
             });
           });
@@ -533,7 +533,7 @@ describe('.configureRouter', () => {
                     name: 'alice',
                   }),
                 }),
-              })
+              }),
             );
           });
         });
@@ -610,7 +610,7 @@ describe('.configureRouter', () => {
             .post('/games/foo/1/rename')
             .send('playerID=0&playerName=alice&newName=ali');
           expect(response.status).toEqual(404);
-          expect(console.warn).toBeCalledWith(warnMsg);
+          expect(console.warn).toHaveBeenCalledWith(warnMsg);
         });
       });
 
@@ -648,15 +648,15 @@ describe('.configureRouter', () => {
                 .post('/games/foo/1/rename')
                 .send({ playerID: 0, credentials: 'SECRET1', newName: 2 });
               expect(response.text).toEqual(
-                'newName must be a string, got number'
+                'newName must be a string, got number',
               );
-              expect(console.warn).toBeCalledWith(warnMsg);
+              expect(console.warn).toHaveBeenCalledWith(warnMsg);
             });
           });
 
           test('is successful', async () => {
             expect(response.status).toEqual(200);
-            expect(console.warn).toBeCalledWith(warnMsg);
+            expect(console.warn).toHaveBeenCalledWith(warnMsg);
           });
 
           test('updates the players', async () => {
@@ -668,9 +668,9 @@ describe('.configureRouter', () => {
                     name: 'ali',
                   }),
                 }),
-              })
+              }),
             );
-            expect(console.warn).toBeCalledWith(warnMsg);
+            expect(console.warn).toHaveBeenCalledWith(warnMsg);
           });
         });
 
@@ -681,7 +681,7 @@ describe('.configureRouter', () => {
               .post('/games/foo/1/rename')
               .send('playerID=2&credentials=SECRET1&newName=joe');
             expect(response.status).toEqual(404);
-            expect(console.warn).toBeCalledWith(warnMsg);
+            expect(console.warn).toHaveBeenCalledWith(warnMsg);
           });
         });
 
@@ -692,7 +692,7 @@ describe('.configureRouter', () => {
               .post('/games/foo/1/rename')
               .send('playerID=0&credentials=SECRET2&newName=mike');
             expect(response.status).toEqual(403);
-            expect(console.warn).toBeCalledWith(warnMsg);
+            expect(console.warn).toHaveBeenCalledWith(warnMsg);
           });
         });
 
@@ -706,7 +706,7 @@ describe('.configureRouter', () => {
 
           test('throws error 403', async () => {
             expect(response.status).toEqual(403);
-            expect(console.warn).toBeCalledWith(warnMsg);
+            expect(console.warn).toHaveBeenCalledWith(warnMsg);
           });
         });
 
@@ -720,7 +720,7 @@ describe('.configureRouter', () => {
 
           test('throws error 403', async () => {
             expect(response.status).toEqual(403);
-            expect(console.warn).toBeCalledWith(warnMsg);
+            expect(console.warn).toHaveBeenCalledWith(warnMsg);
           });
         });
       });
@@ -789,7 +789,7 @@ describe('.configureRouter', () => {
                 .post('/games/foo/1/update')
                 .send({ playerID: 0, credentials: 'SECRET1', newName: 2 });
               expect(response.text).toEqual(
-                'newName must be a string, got number'
+                'newName must be a string, got number',
               );
             });
           });
@@ -807,7 +807,7 @@ describe('.configureRouter', () => {
                     name: 'ali',
                   }),
                 }),
-              })
+              }),
             );
           });
         });
@@ -933,7 +933,7 @@ describe('.configureRouter', () => {
                     }),
                   }),
                 }),
-              })
+              }),
             );
           });
         });
@@ -1065,7 +1065,7 @@ describe('.configureRouter', () => {
                     credentials: 'SECRET2',
                   }),
                 }),
-              })
+              }),
             );
           });
 
@@ -1225,7 +1225,7 @@ describe('.configureRouter', () => {
               }),
             }),
           }),
-        })
+        }),
       );
       expect(response.body.nextMatchID).toBe('newGameID');
     });
@@ -1252,7 +1252,7 @@ describe('.configureRouter', () => {
               }),
             }),
           }),
-        })
+        }),
       );
       expect(response.body.nextMatchID).toBe('newGameID');
     });
@@ -1413,34 +1413,34 @@ describe('.configureRouter', () => {
       describe('isGameover query param', () => {
         test('is undefined if not specified in request', async () => {
           await request(app.callback()).get('/games/bar');
-          expect(dblistMatches).toBeCalledWith(
-            expect.objectContaining({ where: { isGameover: undefined } })
+          expect(dblistMatches).toHaveBeenCalledWith(
+            expect.objectContaining({ where: { isGameover: undefined } }),
           );
         });
         test('is true', async () => {
           await request(app.callback()).get('/games/bar?isGameover=true');
-          expect(dblistMatches).toBeCalledWith(
-            expect.objectContaining({ where: { isGameover: true } })
+          expect(dblistMatches).toHaveBeenCalledWith(
+            expect.objectContaining({ where: { isGameover: true } }),
           );
         });
         test('is false', async () => {
           await request(app.callback()).get('/games/bar?isGameover=false');
-          expect(dblistMatches).toBeCalledWith(
-            expect.objectContaining({ where: { isGameover: false } })
+          expect(dblistMatches).toHaveBeenCalledWith(
+            expect.objectContaining({ where: { isGameover: false } }),
           );
         });
         test('invalid value is ignored', async () => {
           await request(app.callback()).get('/games/bar?isGameover=5');
-          expect(dblistMatches).toBeCalledWith(
-            expect.objectContaining({ where: { isGameover: undefined } })
+          expect(dblistMatches).toHaveBeenCalledWith(
+            expect.objectContaining({ where: { isGameover: undefined } }),
           );
         });
         test('uses first array value', async () => {
           await request(app.callback()).get(
-            '/games/bar?isGameover=true&isGameover=false'
+            '/games/bar?isGameover=true&isGameover=false',
           );
-          expect(dblistMatches).toBeCalledWith(
-            expect.objectContaining({ where: { isGameover: true } })
+          expect(dblistMatches).toHaveBeenCalledWith(
+            expect.objectContaining({ where: { isGameover: true } }),
           );
         });
       });
@@ -1448,41 +1448,41 @@ describe('.configureRouter', () => {
       describe('updatedBefore query param', () => {
         test('is undefined if not specified in request', async () => {
           await request(app.callback()).get('/games/bar');
-          expect(dblistMatches).toBeCalledWith(
+          expect(dblistMatches).toHaveBeenCalledWith(
             expect.objectContaining({
               where: expect.objectContaining({ updatedBefore: undefined }),
-            })
+            }),
           );
         });
         test('is specified', async () => {
           const timestamp = new Date(2020, 3, 4, 5, 6, 7);
           await request(app.callback()).get(
-            `/games/bar?updatedBefore=${timestamp.getTime()}`
+            `/games/bar?updatedBefore=${timestamp.getTime()}`,
           );
-          expect(dblistMatches).toBeCalledWith(
+          expect(dblistMatches).toHaveBeenCalledWith(
             expect.objectContaining({
               where: expect.objectContaining({
                 updatedBefore: timestamp.getTime(),
               }),
-            })
+            }),
           );
         });
         test('invalid value is ignored', async () => {
           await request(app.callback()).get('/games/bar?updatedBefore=-5');
-          expect(dblistMatches).toBeCalledWith(
-            expect.objectContaining({ where: { updatedBefore: undefined } })
+          expect(dblistMatches).toHaveBeenCalledWith(
+            expect.objectContaining({ where: { updatedBefore: undefined } }),
           );
         });
         test('uses first array value', async () => {
           const t1 = new Date(2020, 3, 4, 5, 6, 7).getTime();
           const t2 = new Date(2021, 3, 4, 5, 6, 7).getTime();
           await request(app.callback()).get(
-            `/games/bar?updatedBefore=${t1}&updatedBefore=${t2}`
+            `/games/bar?updatedBefore=${t1}&updatedBefore=${t2}`,
           );
-          expect(dblistMatches).toBeCalledWith(
+          expect(dblistMatches).toHaveBeenCalledWith(
             expect.objectContaining({
               where: expect.objectContaining({ updatedBefore: t1 }),
-            })
+            }),
           );
         });
       });
@@ -1490,41 +1490,41 @@ describe('.configureRouter', () => {
       describe('updatedAfter query param', () => {
         test('is undefined if not specified in request', async () => {
           await request(app.callback()).get('/games/bar');
-          expect(dblistMatches).toBeCalledWith(
+          expect(dblistMatches).toHaveBeenCalledWith(
             expect.objectContaining({
               where: expect.objectContaining({ updatedAfter: undefined }),
-            })
+            }),
           );
         });
         test('is specified', async () => {
           const timestamp = new Date(2020, 3, 4, 5, 6, 7);
           await request(app.callback()).get(
-            `/games/bar?updatedAfter=${timestamp.getTime()}`
+            `/games/bar?updatedAfter=${timestamp.getTime()}`,
           );
-          expect(dblistMatches).toBeCalledWith(
+          expect(dblistMatches).toHaveBeenCalledWith(
             expect.objectContaining({
               where: expect.objectContaining({
                 updatedAfter: timestamp.getTime(),
               }),
-            })
+            }),
           );
         });
         test('invalid value is ignored', async () => {
           await request(app.callback()).get('/games/bar?updatedAfter=-5');
-          expect(dblistMatches).toBeCalledWith(
-            expect.objectContaining({ where: { updatedAfter: undefined } })
+          expect(dblistMatches).toHaveBeenCalledWith(
+            expect.objectContaining({ where: { updatedAfter: undefined } }),
           );
         });
         test('uses first array value', async () => {
           const t1 = new Date(2020, 3, 4, 5, 6, 7).getTime();
           const t2 = new Date(2021, 3, 4, 5, 6, 7).getTime();
           await request(app.callback()).get(
-            `/games/bar?updatedAfter=${t1}&updatedAfter=${t2}`
+            `/games/bar?updatedAfter=${t1}&updatedAfter=${t2}`,
           );
-          expect(dblistMatches).toBeCalledWith(
+          expect(dblistMatches).toHaveBeenCalledWith(
             expect.objectContaining({
               where: expect.objectContaining({ updatedAfter: t1 }),
-            })
+            }),
           );
         });
       });

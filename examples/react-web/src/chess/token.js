@@ -134,7 +134,7 @@ export class Token extends React.Component {
       // Whether this is a drop or a click depends if the mouse moved after drag.
       // Android will issue very small drag events, so we need a distance.
       const dist = Math.sqrt(
-        (this.state.x - this.props.x) ** 2 + (this.state.y - this.props.y) ** 2
+        (this.state.x - this.props.x) ** 2 + (this.state.y - this.props.y) ** 2,
       );
       if (dist > 0.2) {
         this.props.onDrop({
@@ -230,7 +230,7 @@ export class Token extends React.Component {
           elapsed,
           0,
           1,
-          this.props.animationDuration
+          this.props.animationDuration,
         );
 
         this.setState({

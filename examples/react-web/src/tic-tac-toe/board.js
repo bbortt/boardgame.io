@@ -45,7 +45,7 @@ class Board extends React.Component {
             onClick={() => this.onClick(id)}
           >
             {this.props.G.cells[id]}
-          </td>
+          </td>,
         );
       }
       tbody.push(<tr key={i}>{cells}</tr>);

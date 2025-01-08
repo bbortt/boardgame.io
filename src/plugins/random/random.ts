@@ -123,7 +123,7 @@ export class Random {
         return diceCount === undefined
           ? Math.floor(random() * spotvalue) + 1
           : Array.from({ length: diceCount }).map(
-              () => Math.floor(random() * spotvalue) + 1
+              () => Math.floor(random() * spotvalue) + 1,
             );
       };
     }
@@ -134,7 +134,7 @@ export class Random {
       return diceCount === undefined
         ? Math.floor(random() * spotvalue) + 1
         : Array.from({ length: diceCount }).map(
-            () => Math.floor(random() * spotvalue) + 1
+            () => Math.floor(random() * spotvalue) + 1,
           );
     }
 
@@ -177,7 +177,7 @@ export class Random {
        * @param {Array} deck - The array to shuffle. Does not mutate
        *                       the input, but returns the shuffled array.
        */
-      Shuffle: <T extends any>(deck: T[]) => {
+      Shuffle: <T>(deck: T[]) => {
         const clone = [...deck];
         let sourceIndex = deck.length;
         let destinationIndex = 0;

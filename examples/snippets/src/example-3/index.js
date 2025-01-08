@@ -98,7 +98,7 @@ function TicTacToeBoard({ ctx, G, moves }) {
           ) : (
             <button style={cellStyle} onClick={() => onClick(id)} />
           )}
-        </td>
+        </td>,
       );
     }
     tbody.push(<tr key={i}>{cells}</tr>);

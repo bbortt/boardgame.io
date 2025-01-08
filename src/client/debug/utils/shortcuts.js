@@ -36,11 +36,11 @@ export function AssignShortcuts(moveNames, blacklist) {
   let next = 97;
   shortcuts = {};
   for (const name in moveNames) {
-    let shortcut = String.fromCharCode(next);
+    let shortcut = String.fromCodePoint(next);
 
     while (t[shortcut]) {
       next++;
-      shortcut = String.fromCharCode(next);
+      shortcut = String.fromCodePoint(next);
     }
 
     t[shortcut] = true;

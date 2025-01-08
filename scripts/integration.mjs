@@ -1,4 +1,4 @@
-const shell = require('shelljs');
+import shell from 'shelljs';
 
 shell.rm('-rf', 'dist');
 shell.exec('npm pack');

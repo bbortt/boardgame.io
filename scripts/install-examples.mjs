@@ -6,11 +6,11 @@
  * https://opensource.org/licenses/MIT.
  */
 
-const path = require('path');
-const { spawnSync } = require('child_process');
-const { existsSync } = require('fs');
+import path from 'node:path';
+import { spawnSync } from 'node:child_process';
+import { existsSync } from 'node:fs';
 
-const projectRoot = path.resolve(__dirname, '../');
+const projectRoot = path.resolve(import.meta.dirname, '../');
 const webExamplePath = path.resolve(projectRoot, './examples/react-web');
 const modulesPath = path.resolve(webExamplePath, './node_modules');
 

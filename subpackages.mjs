@@ -6,7 +6,7 @@
  * https://opensource.org/licenses/MIT.
  */
 
-module.exports = [
+export default [
   'client',
   'core',
   'debug',

@@ -29,6 +29,7 @@ describe('logging', () => {
     let logging;
 
     beforeAll(() => {
+      // eslint-disable-next-line @typescript-eslint/no-require-imports,unicorn/prefer-module
       logging = require('./logger');
     });
 
@@ -49,6 +50,7 @@ describe('logging', () => {
     beforeAll(() => {
       process.env.NODE_ENV = 'production';
       jest.resetModules();
+      // eslint-disable-next-line @typescript-eslint/no-require-imports,unicorn/prefer-module
       logging = require('./logger');
     });
     afterAll(() => {
@@ -73,6 +75,7 @@ describe('logging', () => {
       jest.resetModules();
       console.log = oldConsoleLog;
       console.error = oldConsoleError;
+      // eslint-disable-next-line @typescript-eslint/no-require-imports,unicorn/prefer-module
       logging = require('./logger');
       console.log = jest.fn();
       console.error = jest.fn();

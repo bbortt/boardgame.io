@@ -1,9 +1,9 @@
 // Generates docs/CHANGELOG.md
 // Run this right after the npm version command.
 
-const { EOL } = require('os');
-const shell = require('shelljs');
-const tempy = require('tempy');
+import { EOL } from 'node:os';
+import shell from 'shelljs';
+import tempy from 'tempy';
 
 shell.config.silent = true;
 const P = EOL + EOL;
@@ -52,13 +52,13 @@ const formatChanges = (changes) =>
         // Linkify commit refs.
         .replace(
           /^(\w+)/,
-          '* [[$1](https://github.com/boardgameio/boardgame.io/commit/$1)]'
+          '* [[$1](https://github.com/boardgameio/boardgame.io/commit/$1)]',
         )
         // Linkify PR references.
         .replace(
           /\(#(\d{3,})\)/,
-          '([#$1](https://github.com/boardgameio/boardgame.io/pull/$1))'
-        )
+          '([#$1](https://github.com/boardgameio/boardgame.io/pull/$1))',
+        ),
     )
     .join(EOL);
 

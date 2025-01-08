@@ -1,7 +1,7 @@
 *.bundle.js
 *.min.js
-node_modules
-dist
-Game.md
+node_modules/
+dist/
+docs/
 package.json
-docs
+pnpm-lock.yaml
