@@ -15,7 +15,7 @@ export default {
     'src/types.ts',
   ],
   setupFiles: ['raf/polyfill', 'jest-date-mock'],
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  setupFilesAfterEnv: ['<rootDir>/.jest.setup.js'],
   transform: {
     '^.+\\.svelte$': 'jest-transform-svelte',
   },
