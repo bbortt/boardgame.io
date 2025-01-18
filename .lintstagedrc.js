@@ -1,4 +1,4 @@
 module.exports = {
-  '{,{.github,benchmark,examples,packages,src}/**/}*.{css,(m|)js(x|),json,md,ts(x|)}':
+  '{,{.github,benchmark,examples,packages,scripts,src}/**/}*.{css,(m|)js(x|),json,md,ts(x|)}':
     ['prettier --write'],
 };

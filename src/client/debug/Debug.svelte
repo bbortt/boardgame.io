@@ -6,7 +6,8 @@
   import { setContext } from 'svelte';
   import { crossfade, fly } from 'svelte/transition';
   import { cubicOut } from 'svelte/easing';
-  import Chevron from 'svelte-icons/fa/FaChevronRight.svelte';
+  import { Icon } from 'svelte-icons-pack';
+  import { FaSolidChevronRight } from 'svelte-icons-pack/fa';
   import Menu from './Menu.svelte';
   import Main from './main/Main.svelte';
   import Info from './info/Info.svelte';
@@ -192,7 +193,7 @@
       out:send={{ key: 'toggle' }}
     >
       <span class="icon" aria-hidden="true">
-        <Chevron />
+        <Icon src={FaSolidChevronRight} />
       </span>
     </button>
     {/if}
@@ -207,7 +208,7 @@
         out:send={{ key: 'toggle' }}
       >
         <span class="icon" aria-hidden="true">
-          <Chevron />
+          <Icon src={FaSolidChevronRight} />
         </span>
       </button>
       {/if}

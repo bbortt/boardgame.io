@@ -12,10 +12,10 @@ import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import filesize from 'rollup-plugin-filesize';
 import svelte from 'rollup-plugin-svelte';
+import { sveltePreprocess } from 'svelte-preprocess';
 import { terser } from 'rollup-plugin-terser';
 import pkg from './package.json';
-import typescript from 'rollup-plugin-typescript2';
-import ts from 'typescript';
+import typescript from '@rollup/plugin-typescript';
 const subpackages = require('./subpackages');
 
 const internalDeps = new Set(['svelte']);
@@ -25,25 +25,21 @@ const external = [
   'socket.io-client',
 ];
 
-const plugins = [
+const plugins = (outDir) => [
   babel({ exclude: '**/node_modules/**' }),
   resolve({ browser: true, only: [/svelte/] }),
   typescript({
-    typescript: ts,
-    tsconfigOverride: {
-      compilerOptions: {
-        declaration: true,
-        declarationDir: './dist/types',
-      },
+    compilerOptions: {
+      declaration: true,
+      declarationDir: outDir + '/types',
     },
-    useTsconfigDeclarationDir: true,
   }),
-  svelte({ extensions: ['.svelte'] }),
+  svelte({ extensions: ['.svelte'], preprocess: sveltePreprocess() }),
 ];
 
 const serverPlugins = [
   resolve(),
-  typescript({ typescript: ts }),
+  typescript(),
   babel({ exclude: ['**/node_modules/**'] }),
   commonjs({ include: 'node_modules/**' }),
 ];
@@ -51,8 +47,8 @@ const serverPlugins = [
 const minifiedPlugins = [
   babel({ exclude: '**/node_modules/**' }),
   resolve({ browser: true }),
-  typescript({ typescript: ts }),
-  svelte({ extensions: ['.svelte'] }),
+  typescript(),
+  svelte({ extensions: ['.svelte'], preprocess: sveltePreprocess() }),
   commonjs(),
   replace({
     include: 'src/**',
@@ -67,22 +63,34 @@ const minifiedPlugins = [
 ];
 
 export default [
-  // Subpackages.
+  // Subpackages: CJS.
   {
     input: subpackages.reduce((obj, name) => {
       obj[name] = `packages/${name}.ts`;
       return obj;
     }, {}),
     external,
-    plugins,
+    plugins: plugins('dist/cjs'),
+    output: [
+      {
+        dir: 'dist/cjs',
+        format: 'cjs',
+      },
+    ],
+  },
+
+  // Subpackages: ESM.
+  {
+    input: subpackages.reduce((obj, name) => {
+      obj[name] = `packages/${name}.ts`;
+      return obj;
+    }, {}),
+    external,
+    plugins: plugins('dist/esm'),
     output: [
       {
         dir: 'dist/esm',
         format: 'esm',
-      },
-      {
-        dir: 'dist/cjs',
-        format: 'cjs',
       },
     ],
   },
@@ -105,7 +113,7 @@ export default [
       { file: pkg.main, format: 'cjs' },
       { file: pkg.module, format: 'esm' },
     ],
-    plugins,
+    plugins: plugins('dist'),
   },
 
   // Browser minified version.
