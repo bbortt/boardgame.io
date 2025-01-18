@@ -38,7 +38,7 @@ const jestConfig: JestConfigWithTsJest = {
     '^.+\\.svelte$': ['svelte-jester', { preprocess: true }],
   },
   transformIgnorePatterns: [
-    '<rootDir>/node_modules/.pnpm/(?!(boardgame.io|flatted|nanoid|svelte|@testing-library/svelte)@)',
+    '<rootDir>/node_modules/.pnpm/(?!(boardgame.io|esm-env|flatted|nanoid|svelte|@testing-library\\+svelte)@)',
   ],
   testPathIgnorePatterns: [
     '.husky/',
