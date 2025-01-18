@@ -31,14 +31,14 @@ merged into the `main` branch in this repo.
 The following commands must pass for a Pull Request to be considered:
 
 ```
-$ npm test
-$ npm run lint
+$ pnpm test
+$ pnpm run lint
 ```
 
 You can also check the test coverage by running:
 
 ```
-$ npm run test:coverage
+$ pnpm run test:coverage
 ```
 
 #### If you make changes to the docs
@@ -46,7 +46,7 @@ $ npm run test:coverage
 Use the following command to preview them:
 
 ```
-$ npm run docs
+$ pnpm run docs
 ```
 
 ## VS Code remote dev container support

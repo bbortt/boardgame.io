@@ -6,6 +6,6 @@
 # committing the change.
 
 rm -rf dist
-npm run build
+pnpm run build
 rm -rf ../../docs/documentation/snippets
 cp -r dist ../../docs/documentation/snippets

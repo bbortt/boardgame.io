@@ -1,7 +1,8 @@
 <script>
   export let metadata;
 
-  import Arrow from 'svelte-icons/fa/FaArrowAltCircleDown.svelte'
+  import { Icon } from 'svelte-icons-pack';
+  import { FaSolidCircleArrowDown } from 'svelte-icons-pack/fa';
 
   let nodes = [];
   let prevNodes = [];
@@ -49,7 +50,7 @@
   {#each nodes as { node, selectedIndex }, i}
     {#if i !== 0}
     <div class="icon">
-      <Arrow/>
+      <Icon src={FaSolidCircleArrowDown} />
     </div>
     {/if}
 
