@@ -20,7 +20,7 @@
     "examples": "pnpm run start",
     "examples:install": "node scripts/install-examples.js",
     "pretest": "pnpm run lint",
-    "test": "cross-env-shell NODE_ENV=test jest --config .jest.config.ts",
+    "test": "cross-env NODE_ENV=test jest --config .jest.config.ts",
     "test:watch": "pnpm test -- --watch",
     "test:coverage": "pnpm test -- --coverage --collectCoverageFrom=\"src/**\"",
     "test:coveralls": "coveralls < coverage/lcov.info",
@@ -103,7 +103,7 @@
     "setimmediate": "1.0.5",
     "socket.io": "4.8.1",
     "socket.io-client": "4.8.1",
-    "svelte": "4.2.19",
+    "svelte": "5.19.0",
     "svelte-json-tree-auto": "0.1.0",
     "ts-toolbelt": "6.3.6"
   },

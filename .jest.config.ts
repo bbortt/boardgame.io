@@ -1,5 +1,5 @@
-import { createJsWithBabelEsmPreset } from 'ts-jest';
 import type { JestConfigWithTsJest } from 'ts-jest';
+import { createJsWithBabelEsmPreset } from 'ts-jest';
 
 const { CI } = process.env;
 
@@ -35,7 +35,7 @@ const jestConfig: JestConfigWithTsJest = {
   testEnvironment: 'jsdom',
   transform: {
     ...presetConfig.transform,
-    '^.+\\.svelte(\\.(js|ts))?$': 'svelte-jester',
+    '^.+\\.svelte$': ['svelte-jester', { preprocess: true }],
   },
   transformIgnorePatterns: [
     '<rootDir>/node_modules/.pnpm/(?!(boardgame.io|flatted|nanoid|svelte|@testing-library/svelte)@)',
