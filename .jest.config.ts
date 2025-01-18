@@ -1,11 +1,10 @@
-import { createJsWithBabelPreset } from 'ts-jest';
+import { createJsWithBabelEsmPreset } from 'ts-jest';
 import type { JestConfigWithTsJest } from 'ts-jest';
-import { sveltePreprocess } from 'svelte-preprocess';
 
 const { CI } = process.env;
 
 // https://kulshekhar.github.io/ts-jest/docs/getting-started/presets/#createjswithbabelesmpresetoptions
-const presetConfig = createJsWithBabelPreset({
+const presetConfig = createJsWithBabelEsmPreset({
   babelConfig: '<rootDir>/babel.config.json',
 });
 
@@ -17,6 +16,8 @@ const jestConfig: JestConfigWithTsJest = {
     'src/client/debug/.*',
     'src/types.ts',
   ],
+  extensionsToTreatAsEsm: [...presetConfig.extensionsToTreatAsEsm, '.svelte'],
+  moduleFileExtensions: ['js', 'svelte', 'ts', 'tsx'],
   moduleNameMapper: {
     '\\.(css)$': 'identity-obj-proxy',
     '\\.(svg)$': '<rootDir>/.empty_module.js',
@@ -30,15 +31,15 @@ const jestConfig: JestConfigWithTsJest = {
     ['jest-junit', { outputDirectory: 'reports', outputName: 'report.xml' }],
   ],
   setupFiles: ['raf/polyfill', 'jest-date-mock'],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   testEnvironment: 'jsdom',
   transform: {
-    '^.+\\.svelte$': [
-      'jest-transform-svelte',
-      { preprocess: sveltePreprocess() },
-    ],
     ...presetConfig.transform,
+    '^.+\\.svelte(\\.(js|ts))?$': 'svelte-jester',
   },
-  transformIgnorePatterns: ['node_modules/(?!(boardgame.io|flatted)/)'],
+  transformIgnorePatterns: [
+    '<rootDir>/node_modules/.pnpm/(?!(boardgame.io|flatted|nanoid|svelte|@testing-library/svelte)@)',
+  ],
   testPathIgnorePatterns: [
     '.husky/',
     '.npm/',

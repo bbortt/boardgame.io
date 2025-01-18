@@ -6,7 +6,7 @@
  * https://opensource.org/licenses/MIT.
  */
 
-module.exports = [
+export const subpackages = [
   'client',
   'core',
   'debug',

@@ -16,7 +16,7 @@ import { sveltePreprocess } from 'svelte-preprocess';
 import { terser } from 'rollup-plugin-terser';
 import pkg from './package.json';
 import typescript from '@rollup/plugin-typescript';
-const subpackages = require('./subpackages');
+import { subpackages } from './subpackages';
 
 const internalDeps = new Set(['svelte']);
 const external = [
