@@ -9,6 +9,6 @@
     "esModuleInterop": true,
     "jsx": "react",
     "skipLibCheck": true,
-    "plugins": [{ "transform": "ts-transformer-imports" }]
+    "plugins": [{ "transform": "@zerollup/ts-transform-paths" }]
   }
 }
